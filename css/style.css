@@ -1,0 +1,26 @@
+.posts{
+    background-color: blue;
+    padding: 20px;
+    margin-bottom: 25px;
+    width: 60%;
+}
+.overlay{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: antiquewhite;
+    display: none;
+}
+.overlay.activeOverlay{
+    display: block;
+}
+.close{
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
+    color: brown;
+    font-size: 40px;
+}
