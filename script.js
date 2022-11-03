@@ -2,6 +2,9 @@ let mainWraperPost = document.getElementById("post-wraperBlock");
 let postOverlay = document.getElementById("overlay");
 let overlayContent = document.getElementById("postcontent");
 let overlayClose = document.getElementById("close");
+let postAdd = document.getElementById("add");
+let addOverlay = document.getElementById("postoverlayAdd");
+let form =document.getElementById('form');
 
 // ჩვენი მთავარი ფუნქცია, რომლის საშუალებითაც ვასრულებთ ajax მოთხვონას სერვერზე
 function ajax(url, callback) {
@@ -60,6 +63,31 @@ function createPostRenderLogic(item) {
 
   mainWraperPost.appendChild(divWraper);
 }
+// პოსტის დამატება
+postAdd.addEventListener('click', function(){
+  addOverlay.classList.add("activeAdd");
+})
+
+form.addEventListener("submit", function (event) {
+  event.preventDefault();
+  let fromData = {
+    title: event.target[0].value,
+  };
+
+  fetch("https://jsonplaceholder.typicode.com/posts", {
+    method: "POST",
+    body: JSON.stringify(fromData),
+    headers: {
+      "Content-type": "application/json; charset=UTF-8",
+    },
+  })
+  .then((response) => response.json())
+  .then((newPost) => {
+    createPostRenderLogic(newPost);
+    addOverlay.classList.remove("activeAdd");
+  });
+})
+
 
 // დავხურავთ პოპაპს
 overlayClose.addEventListener("click", function () {
